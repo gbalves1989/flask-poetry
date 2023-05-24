@@ -51,7 +51,7 @@ jobs:
         run: poetry run task upgrade
       
       - name: Executando os testes
-        run: poetry run task test --cov-report=xml
+        run: poetry run task test 
       
       - name: Subindo a cobertura de testes para o codedev
         uses: codecov/codecov-action@v3
