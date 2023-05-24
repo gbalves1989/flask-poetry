@@ -33,5 +33,5 @@ class CourseRespository(CourseInteface):
         db.session.delete(course_db)
         db.session.commit()
 
-    def find_last_register() -> CourseModel:
+    def find_last_course_register() -> CourseModel:
         return CourseModel.query.order_by(desc(CourseModel.id)).first()

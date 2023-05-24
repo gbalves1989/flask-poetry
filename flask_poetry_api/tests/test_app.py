@@ -139,7 +139,9 @@ class AppTest(unittest.TestCase):
 
     def test_7_show_course(self):
         with app.app_context():
-            last_course: CourseModel = CourseRespository.find_last_register()
+            last_course: CourseModel = (
+                CourseRespository.find_last_course_register()
+            )
             response: object = self.get_token()
 
             response_course: Response = self.client.get(
@@ -177,7 +179,9 @@ class AppTest(unittest.TestCase):
 
     def test_9_update_course(self):
         with app.app_context():
-            last_course: CourseModel = CourseRespository.find_last_register()
+            last_course: CourseModel = (
+                CourseRespository.find_last_course_register()
+            )
             response: object = self.get_token()
 
             response_course: Response = self.client.put(
@@ -204,10 +208,11 @@ class AppTest(unittest.TestCase):
                 result_course.get('description'), 'formação em php'
             )
 
-    """
     def test_10_delete_course(self):
         with app.app_context():
-            last_course: CourseModel = CourseRespository.find_last_register()
+            last_course: CourseModel = (
+                CourseRespository.find_last_course_register()
+            )
             response: object = self.get_token()
 
             response_course: Response = self.client.delete(
@@ -220,7 +225,6 @@ class AppTest(unittest.TestCase):
 
             self.assertEqual(response_course.status_code, 204)
             self.assertIn('application/json', response_course.content_type)
-    """
 
     def get_token(self) -> object:
         response: Response = self.client.post(
