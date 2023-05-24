@@ -210,10 +210,25 @@ class AppTest(unittest.TestCase):
 
     def test_10_delete_course(self):
         with app.app_context():
+            response: object = self.get_token()
+
+            response_new_course: Response = self.client.post(
+                '/api/v1/courses/',
+                data=json.dumps(
+                    dict(
+                        name='curso de python',
+                        description='formação em python',
+                    )
+                ),
+                content_type='application/json',
+                headers={
+                    'Authorization': f"Bearer {response.get('access_token')}"
+                },
+            )
+
             last_course: CourseModel = (
                 CourseRespository.find_last_course_register()
             )
-            response: object = self.get_token()
 
             response_course: Response = self.client.delete(
                 f'/api/v1/courses/{last_course.id}/',
