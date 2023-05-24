@@ -1,5 +1,7 @@
 from typing import List
 
+from sqlalchemy import desc
+
 from flask_poetry_api import db
 from flask_poetry_api.entities.course_entity import CourseEntity
 from flask_poetry_api.interfaces.course_interface import CourseInteface
@@ -30,3 +32,6 @@ class CourseRespository(CourseInteface):
     def delete(course_db: CourseModel) -> None:
         db.session.delete(course_db)
         db.session.commit()
+
+    def find_last_register() -> CourseModel:
+        return CourseModel.query.order_by(desc(CourseModel.id)).first()

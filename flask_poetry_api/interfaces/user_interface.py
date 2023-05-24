@@ -16,3 +16,7 @@ class UserInterface(ABC):
     @abstractmethod
     def find_by_id(user_id: int) -> UserModel:
         pass
+
+    @abstractmethod
+    def find_last_register() -> UserModel:
+        pass

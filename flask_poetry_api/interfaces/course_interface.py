@@ -25,3 +25,7 @@ class CourseInteface(ABC):
     @abstractmethod
     def delete(course_db: CourseModel) -> None:
         pass
+
+    @abstractmethod
+    def find_last_register() -> CourseModel:
+        pass
