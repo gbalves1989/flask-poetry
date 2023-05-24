@@ -216,7 +216,7 @@ class AppTest(unittest.TestCase):
             response: object = self.get_token()
 
             response_course: Response = self.client.delete(
-                f'/api/v1/courses/1/',
+                f'/api/v1/courses/{last_course.id}/',
                 content_type='application/json',
                 headers={
                     'Authorization': f"Bearer {response.get('access_token')}"
