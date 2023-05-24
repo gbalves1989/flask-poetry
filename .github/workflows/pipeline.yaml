@@ -12,7 +12,7 @@ jobs:
       EXPIRES_DELTA: ${{ secrets.EXPIRES_DELTA }}
 
     services:
-      postgres_db:
+      postgres:
         image: postgres
         env:
           POSTGRES_DB: flask_poetry_test
