@@ -1,7 +1,7 @@
 from flask_jwt_extended import jwt_required
 from flask_openapi3 import APIBlueprint, Tag
 
-from flask_poetry_api import app
+from flask_poetry_api import app, security
 from flask_poetry_api.routes.requests.course_request import (
     CourseBody,
     CoursePath,
@@ -16,7 +16,11 @@ from flask_poetry_api.services.course_service import CourseService
 
 tag: Tag = Tag(name='Courses', description='List of routes')
 api_courses: APIBlueprint = APIBlueprint(
-    'courses', __name__, url_prefix='/api/v1/courses', abp_tags=[tag]
+    'courses',
+    __name__,
+    url_prefix='/api/v1/courses',
+    abp_tags=[tag],
+    abp_security=security,
 )
 
 
