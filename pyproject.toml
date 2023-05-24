@@ -1,0 +1,47 @@
+[tool.poetry]
+name = "flask-poetry-api"
+version = "0.1.0"
+description = ""
+authors = ["gbalves1989 <gbalves1989@gmail.com>"]
+readme = "README.md"
+packages = [{include = "flask_poetry_api"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+flask-openapi3 = {extras = ["async"], version = "^2.3.2"}
+flask-cors = "^3.0.10"
+flask-marshmallow = "^0.15.0"
+flask-migrate = "^4.0.4"
+flask-sqlalchemy = "^3.0.3"
+marshmallow = "^3.19.0"
+marshmallow-sqlalchemy = "^0.29.0"
+psycopg2-binary = "^2.9.6"
+python-dotenv = "^1.0.0"
+sqlalchemy = "^2.0.15"
+passlib = "^1.7.4"
+flask-jwt-extended = "^4.4.4"
+
+
+[tool.poetry.group.dev.dependencies]
+blue = "^0.9.1"
+isort = "^5.12.0"
+taskipy = "^1.11.0"
+coverage = "^7.2.5"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.isort]
+profile = "black"
+line_length = 79
+
+[tool.taskipy.tasks]
+init = "flask db init"
+migrate = "flask db migrate"
+upgrade = "flask db upgrade"
+run = "python app.py"
+lint = "blue --check --diff app.py config.py ./flask_poetry_api && isort --check --diff app.py config.py ./flask_poetry_api"
+pre_test = "task lint"
+test = "python -m coverage run --omit=flask_poetry_api/entities/*.py,flask_poetry_api/interfaces/*.py -m unittest && python -m coverage report"
+post_test = "python -m coverage html"
