@@ -38,10 +38,10 @@ class AppTest(unittest.TestCase):
         self.assertEqual(result.get('email'), 'admin@gmail.com')
 
         with app.app_context():
-            last_user: int = self.last_register_user()
+            last_user: UserModel = self.last_register_user()
             user_db: UserModel = UserRepository.find_by_id(last_user)
 
-            self.assertEqual(user_db.id, last_user)
+            self.assertEqual(user_db.id, last_user.id)
 
     def test_2_login(self):
         response: Response = self.client.post(
@@ -137,11 +137,11 @@ class AppTest(unittest.TestCase):
         self.assertEqual(len(result), count_courses)
 
     def test_7_show_course(self):
-        last_course: int = self.last_register_course()
+        last_course: CourseModel = self.last_register_course()
         response: object = self.get_token()
 
         response_course: Response = self.client.get(
-            f'/api/v1/courses/{last_course}/',
+            f'/api/v1/courses/{last_course.id}/',
             content_type='application/json',
             headers={
                 'Authorization': 'Bearer ' + response.get('access_token')
@@ -174,11 +174,11 @@ class AppTest(unittest.TestCase):
             self.assertEqual(response_delete.status_code, 404)
 
     def test_9_update_course(self):
-        last_course: int = self.last_register_course()
+        last_course: CourseModel = self.last_register_course()
         response: object = self.get_token()
 
         response_course: Response = self.client.put(
-            f'/api/v1/courses/{last_course}/',
+            f'/api/v1/courses/{last_course.id}/',
             data=json.dumps(
                 dict(
                     name='curso de php',
@@ -200,11 +200,11 @@ class AppTest(unittest.TestCase):
         self.assertEqual(result_course.get('description'), 'formação em php')
 
     def test_10_delete_course(self):
-        last_course: int = self.last_register_course()
+        last_course: CourseModel = self.last_register_course()
         response: object = self.get_token()
 
         response_course: Response = self.client.delete(
-            f'/api/v1/courses/{last_course}/',
+            f'/api/v1/courses/{last_course.id}/',
             content_type='application/json',
             headers={
                 'Authorization': f"Bearer {response.get('access_token')}"
@@ -228,20 +228,20 @@ class AppTest(unittest.TestCase):
 
         return json.loads(response.data)
 
-    def last_register_user(self) -> int:
+    def last_register_user(self) -> UserModel:
         with app.app_context():
             model_db: UserModel = (
                 db.session.query(UserModel)
                 .order_by(desc(UserModel.id))
                 .first()
             )
-            return model_db.id
+            return model_db
 
-    def last_register_course(self) -> int:
+    def last_register_course(self) -> CourseModel:
         with app.app_context():
             model_db: CourseModel = (
                 db.session.query(CourseModel)
                 .order_by(desc(CourseModel.id))
                 .first()
             )
-            return model_db.id
+            return model_db
