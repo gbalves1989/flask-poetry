@@ -5,6 +5,12 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
+    env:
+      SQLALCHEMY_DATABASE_URI: ${{ secrets.SQLALCHEMY_DATABASE_URI }}
+      SQLALCHEMY_TRACK_MODIFICATIONS: ${{ secrets.SQLALCHEMY_TRACK_MODIFICATIONS }}
+      SECRET_KEY: ${{ secrets.SECRET_KEY }}
+      EXPIRES_DELTA: ${{ secrets.EXPIRES_DELTA }}
+
     services:
       postgres:
         image: postgres
@@ -26,12 +32,6 @@ jobs:
         with:
           python-version: '3.11.3'
         
-        env:
-          SQLALCHEMY_DATABASE_URI: ${{ secrets.SQLALCHEMY_DATABASE_URI }}
-          SQLALCHEMY_TRACK_MODIFICATIONS: ${{ secrets.SQLALCHEMY_TRACK_MODIFICATIONS }}
-          SECRET_KEY: ${{ secrets.SECRET_KEY }}
-          EXPIRES_DELTA: ${{ secrets.EXPIRES_DELTA }}
-      
       - name: Instalação do poetry
         run: pip install poetry
 
