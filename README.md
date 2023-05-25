@@ -1,5 +1,5 @@
 # flask-poetry
-Api desenvolvida em python com flask.
+## Api desenvolvida em python com flask.
 - Gerenciador de dependências com poetry
 - API documentada usando flask-openapi3
 - Autenticação com JWT
@@ -7,7 +7,7 @@ Api desenvolvida em python com flask.
 - CI/CD Github Actions
 - Cobertura de testes usando Codecov 
 
-Testar aplicação localmente
+## Testar aplicação localmente
 - Adicionar um arquivo .env
   - SQLALCHEMY_DATABASE_URI= Ex.(postgresql://usuario:senha@host:porta/nome-do-banco) 
   - SQLALCHEMY_TRACK_MODIFICATIONS=False -> True ou False
