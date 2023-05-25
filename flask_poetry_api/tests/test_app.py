@@ -140,7 +140,7 @@ class AppTest(unittest.TestCase):
     def test_7_show_course(self):
         with app.app_context():
             last_course: CourseModel = (
-                CourseRespository.find_last_course_register()
+                CourseRespository.find_last_register()
             )
             response: object = self.get_token()
 
@@ -180,7 +180,7 @@ class AppTest(unittest.TestCase):
     def test_9_update_delete_course(self):
         with app.app_context():
             last_course: CourseModel = (
-                CourseRespository.find_last_course_register()
+                CourseRespository.find_last_register()
             )
             response: object = self.get_token()
 
