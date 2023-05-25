@@ -1,5 +1,6 @@
 # flask-poetry
 [![codecov](https://codecov.io/gh/gbalves1989/flask-poetry/branch/main/graph/badge.svg?token=8BJ02V70OK)](https://codecov.io/gh/gbalves1989/flask-poetry)
+[![Pipeline](https://github.com/gbalves1989/flask-poetry/actions/workflows/pipeline.yaml/badge.svg)](https://github.com/gbalves1989/flask-poetry/actions/workflows/pipeline.yaml)
 
 ## Api desenvolvida em python com flask.
 - Gerenciador de dependências com poetry
