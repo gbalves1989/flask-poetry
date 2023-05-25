@@ -27,5 +27,5 @@ class CourseInteface(ABC):
         pass
 
     @abstractmethod
-    def find_last_course_register() -> CourseModel:
+    def find_last_register() -> CourseModel:
         pass

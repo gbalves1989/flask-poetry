@@ -177,7 +177,7 @@ class AppTest(unittest.TestCase):
             response_delete: Response = CourseService.delete_course(1000)
             self.assertEqual(response_delete.status_code, 404)
 
-    def test_9_update_course(self):
+    def test_9_update_delete_course(self):
         with app.app_context():
             last_course: CourseModel = (
                 CourseRespository.find_last_course_register()
@@ -220,27 +220,6 @@ class AppTest(unittest.TestCase):
             self.assertIn(
                 'application/json', response_course_delete.content_type
             )
-
-    """      
-    def test_10_delete_course(self):
-        with app.app_context():
-            response: object = self.get_token()
-
-            last_course: CourseModel = (
-                CourseRespository.find_last_course_register()
-            )
-
-            response_course: Response = self.client.delete(
-                f'/api/v1/courses/{last_course.id}/',
-                content_type='application/json',
-                headers={
-                    'Authorization': f"Bearer {response.get('access_token')}"
-                },
-            )
-
-            self.assertEqual(response_course.status_code, 204)
-            self.assertIn('application/json', response_course.content_type)
-    """
 
     def get_token(self) -> object:
         response: Response = self.client.post(
