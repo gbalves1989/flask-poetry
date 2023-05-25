@@ -208,23 +208,23 @@ class AppTest(unittest.TestCase):
                 result_course.get('description'), 'formação em php'
             )
 
-    def test_10_delete_course(self):
-        with app.app_context():
-            response: object = self.get_token()
-
-            response_new_course: Response = self.client.post(
-                '/api/v1/courses/',
-                data=json.dumps(
-                    dict(
-                        name='curso de python',
-                        description='formação em python',
-                    )
-                ),
+            response_course_delete: Response = self.client.delete(
+                f'/api/v1/courses/{last_course.id}/',
                 content_type='application/json',
                 headers={
                     'Authorization': f"Bearer {response.get('access_token')}"
                 },
             )
+
+            self.assertEqual(response_course_delete.status_code, 204)
+            self.assertIn(
+                'application/json', response_course_delete.content_type
+            )
+
+    """      
+    def test_10_delete_course(self):
+        with app.app_context():
+            response: object = self.get_token()
 
             last_course: CourseModel = (
                 CourseRespository.find_last_course_register()
@@ -240,6 +240,7 @@ class AppTest(unittest.TestCase):
 
             self.assertEqual(response_course.status_code, 204)
             self.assertIn('application/json', response_course.content_type)
+    """
 
     def get_token(self) -> object:
         response: Response = self.client.post(
