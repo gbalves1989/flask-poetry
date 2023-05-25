@@ -1,4 +1,6 @@
 # flask-poetry
+[![codecov](https://codecov.io/gh/gbalves1989/flask-poetry/branch/main/graph/badge.svg?token=8BJ02V70OK)](https://codecov.io/gh/gbalves1989/flask-poetry)
+
 ## Api desenvolvida em python com flask.
 - Gerenciador de dependências com poetry
 - API documentada usando flask-openapi3
